@@ -1,0 +1,44 @@
+Face Expression Dataset with Inconsistent Rankings
+
+The original pictures from BU_3DFE dataset can be downloaded in http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html .
+
+The dataset includes 100 subjects (56 females and 44 males) with the age ranging from 18 to 70 years old and a variety of ethnic/racial ancestries. Each subject performed six basic emotions happiness, sadness, surprise, anger, disgust and fear, each of which includes four intensity levels.
+There are in total 2400 facial expression images (only the frontal view images are used) included in the dataset. The neutral expression in the original BU_3DFE dataset is not used in this dataset. 
+Eight human rankers are requested to label the images. For each image, they first select from six candidate labels what they think are relevant to the image, and then rank the relevant labels in descending order of relevance to the image. Each human ranker makes his/her decisions independently, i.e., each ranker can not see the results from other rankers.
+
+In "pic_face.mat", pic is 1*n struct where n is the number of instances, in face expression dataset n is 2400.
+
+pic(i) is the inconsistent rankings of i-th image, e.g.
+"pic(1)" refers to "F0001_AN01WH_F2D.bmp" in origin dataset.
+"pic(2)" refers to "F0001_AN02WH_F2D.bmp" in origin dataset.
+"pic(3)" refers to "F0001_AN03WH_F2D.bmp" in origin dataset.
+"pic(4)" refers to "F0001_AN04WH_F2D.bmp" in origin dataset.
+"pic(5)" refers to "F0001_DI01WH_F2D.bmp" in origin dataset.
+"pic(6)" refers to "F0001_DI02WH_F2D.bmp" in origin dataset.
+"pic(7)" refers to "F0001_DI03WH_F2D.bmp" in origin dataset.
+"pic(8)" refers to "F0001_DI04WH_F2D.bmp" in origin dataset.
+"pic(9)" refers to "F0001_FE01WH_F2D.bmp" in origin dataset.
+"pic(13)" refers to "F0001_HA01WH_F2D.bmp" in origin dataset.
+"pic(17)" refers to "F0001_SA01WH_F2D.bmp" in origin dataset.
+"pic(21)" refers to "F0001_SU01WH_F2D.bmp" in origin dataset.
+"pic(25)" refers to "F0002_AN01BL_F2D.bmp" in origin dataset.
+etc..
+
+Each of pic(i).label is a matrix with size r*c, where r is the number of rankers and c is the number of labels (including the virtual label).
+In natural scene dataset r is 8 and c is 7.
+The labels is:
+1	happiness
+2	sadness
+3	surprise
+4	anger
+5	disgust
+6	fear
+7	virtual
+
+The pic(i).label(j, :) is the ranking labeled by j-th ranker in descending order of relevance to the image.
+The labels ranked before virtual label are relevant labels. And those ranked after virtual label are irrelevant labels, with tie ranks.
+Such as pic(1).label(1, :), which is the ranking labeled by the first ranker for the first image:
+2	6	7	1	3	4	5
+In this ranking, labels 2(sadness) and 6(fear) are relevant labels, while 1(happiness), 3(surprise), 4(anger) and 5(disgust) are irrelevant labels.
+And 2(sadness) > 6(fear).
+
